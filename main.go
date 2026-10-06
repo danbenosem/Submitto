@@ -7,6 +7,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/static/style.css", styleHandler)
 
 	http.ListenAndServe("localhost:8080", nil)
 }
@@ -21,4 +22,10 @@ func homeHandler(write http.ResponseWriter, read *http.Request) {
 	}
 
 	temp.Execute(write, nil)
+}
+
+func styleHandler(write http.ResponseWriter, read *http.Request) {
+
+	write.Header().Set("Content-Type", "text/css")
+	http.ServeFile(write, read, "static/style.css")
 }
