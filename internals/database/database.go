@@ -12,6 +12,9 @@ import (
 	func Connect() (*gorm.DB, error) {
 
       err:=godotenv.Load()
+	  if err!=nil{
+		return nil, err
+	  }
 
 	  dsn:=fmt.Sprintf("host=localhost user=%s password=%s dbname=%s port=5432 sslmode=disable",
 		os.Getenv("POSTGRES_USER"),
@@ -21,12 +24,14 @@ import (
 		
 	)
 
-	db,err = gorm.Open(postgres.Open(dsn), &gorm.Config{})			
+	db,err := gorm.Open(postgres.Open(dsn), &gorm.Config{})			
 	  if err!=nil{	
 		return nil, err		
 	  }
   
 
-	  
+
+	  return db, nil
+
 
 	}

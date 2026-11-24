@@ -2,7 +2,7 @@ package models
 
 type Form struct{
 
-	Id int
+	ID	 int
 
 	UserId int
 
